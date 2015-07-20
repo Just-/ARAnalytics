@@ -639,7 +639,14 @@ static BOOL _ARLogShouldPrintStdout = YES;
     if (!_sharedAnalytics.eventsDictionary) {
         _sharedAnalytics.eventsDictionary = [NSMutableDictionary dictionary];
     }
+    
+    // some providers should use time as parameter when finish event...
     _sharedAnalytics.eventsDictionary[event] = [NSDate date];
+    
+    // ... others (fe flurry) should be notified when start event
+    [_sharedAnalytics iterateThroughProviders:^(ARAnalyticalProvider *provider) {
+        [provider startTimingEvent:event];
+    }];
 }
 
 + (void)finishTimingEvent:(NSString *)event

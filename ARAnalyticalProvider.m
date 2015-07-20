@@ -65,6 +65,8 @@ NSString *const ARAnalyticalProviderNewPageViewEventScreenPropertyKey = @"screen
     [self event:event withProperties:mutableProperties];
 }
 
+- (void)startTimingEvent:(NSString *)event {}
+
 - (void)didShowNewPageView:(NSString *)pageTitle {
     [self didShowNewPageView:pageTitle withProperties:nil];
 }

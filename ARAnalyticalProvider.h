@@ -29,6 +29,9 @@ extern NSString *const ARAnalyticalProviderNewPageViewEventScreenPropertyKey;
 /// @warning the properites must not contain the key string `length`.
 - (void)logTimingEvent:(NSString *)event withInterval:(NSNumber *)interval properties:(NSDictionary *)properties;
 
+/// Notify a provider that event has started
+- (void)startTimingEvent:(NSString *)event;
+
 /// Pass a specific event for showing a page
 - (void)didShowNewPageView:(NSString *)pageTitle;
 
