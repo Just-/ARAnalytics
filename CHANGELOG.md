@@ -1,5 +1,30 @@
 # ARAnalytics
 
+## Version 3.8.0
+
+* Adds Parse for OS X (@stel)
+* Updates TandexMobileMetrics (@BamX)
+* Fix for Fabric (@Navideck-fotis)
+
+## Version 3.7.1
+
+* Changed pointers to const immutable strings to const pointers to immutable strings (@diogot)
+* Updates to Localytics (@joelmarquez90)
+* Support multiple Mixpanel instances (@ed-at-work)
+
+## Version 3.7
+
+* Migrates Google Analytics to use the official Podspec (@pietbrauer)
+
+## Version 3.6.4
+
+* Replace deprecated API usage of Amplitude ( @sodastsai )
+* Replace class method calls of Crashlytics by calls to `sharedInstances` (class methods are deprecated) ( @sodastsai )
+* Add dependencies to Crashlytics and Fabric to their providers. ( @sodastsai )
+* Adds InstallTracker (@Brain89)
+* Shows the event name in finishTimingEvent (@rinatkhanov)
+* Fixes Keen integration (@rinatkhanov)
+
 ## Version 3.6.3
 
 * Implement `didShowNewPageView:withProperties:` correctly (Google Analytics) ( @sodastsai )

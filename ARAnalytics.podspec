@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         =  'ARAnalytics'
-  s.version      =  '3.6.2'
+  s.version      =  '3.8.0'
   s.license      =  {:type => 'MIT', :file => 'LICENSE' }
   s.homepage     =  'https://github.com/orta/ARAnalytics'
   s.authors      =  { 'orta' => 'orta.therox@gmail.com', 'Daniel Haight' => "confidence.designed@gmail.com" }
@@ -14,8 +14,8 @@ Pod::Spec.new do |s|
 
   mixpanel       = { :spec_name => "Mixpanel",            :dependency => "Mixpanel" }
   localytics     = { :spec_name => "Localytics",          :dependency => "Localytics" }
-  flurry         = { :spec_name => "Flurry",              :dependency => "FlurrySDK" }
-  google         = { :spec_name => "GoogleAnalytics",     :dependency => "GoogleAnalytics", :has_extension => true }
+  flurry         = { :spec_name => "Flurry",              :dependency => "Flurry-iOS-SDK" }
+  google         = { :spec_name => "GoogleAnalytics",     :dependency => "Google/Analytics", :has_extension => true }
   kissmetrics    = { :spec_name => "KISSmetrics",         :dependency => "KISSmetrics" }
   crittercism    = { :spec_name => "Crittercism",         :dependency => "CrittercismSDK" }
   countly        = { :spec_name => "Countly",             :dependency => "Countly" }
@@ -26,7 +26,7 @@ Pod::Spec.new do |s|
   amplitude      = { :spec_name => "Amplitude",           :dependency => "Amplitude-iOS" }
   hockeyApp      = { :spec_name => "HockeyApp",           :dependency => "HockeySDK-Source" }
   hockeyAppLib   = { :spec_name => "HockeyAppLib",        :dependency => "HockeySDK" }
-  parseAnalytics = { :spec_name => "ParseAnalytics",      :dependency => "Parse" }
+  parseAnalytics = { :spec_name => "ParseAnalytics",      :dependency => "Parse", :has_extension => true }
   heap           = { :spec_name => "HeapAnalytics",       :dependency => "Heap" }
   chartbeat      = { :spec_name => "Chartbeat",           :dependency => "Chartbeat", :has_extension => true }
   umeng          = { :spec_name => "UMengAnalytics",      :dependency => "UMengAnalytics" }
@@ -36,22 +36,24 @@ Pod::Spec.new do |s|
   adjust         = { :spec_name => "Adjust",              :dependency => "Adjust" }
   intercom       = { :spec_name => "Intercom",            :dependency => "Intercom" }
   librato        = { :spec_name => "Librato" }
-  crashlytics    = { :spec_name => "Crashlytics" }
-  fabric         = { :spec_name => "Fabric" }
+  crashlytics    = { :spec_name => "Crashlytics",         :dependency => "Crashlytics" }
+  fabric         = { :spec_name => "Fabric",              :dependency => ["Fabric", "Crashlytics"] }
   appsflyer      = { :spec_name => "AppsFlyer",           :dependency => "AppsFlyer-SDK" }
   branch         = { :spec_name => "Branch",              :dependency => "Branch" }
   snowplow       = { :spec_name => "Snowplow",            :dependency => "SnowplowTracker" }
   sentry         = { :spec_name => "Sentry",              :dependency => "Raven" }
   keen           = { :spec_name => "Keen",                :dependency => "KeenClient" }
   adobe          = { :spec_name => "Adobe",               :dependency => "AdobeMobileSDK" }
+  installtracker = { :spec_name => "InstallTracker",      :dependency => "InstallTracker"}
 
   kissmetrics_mac = { :spec_name => "KISSmetricsOSX",  :dependency => "KISSmetrics",            :osx => true,  :provider => "KISSmetrics" }
 # countly_mac     = { :spec_name => "CountlyOSX",      :dependency => "Countly",                :osx => true,  :provider => "Countly" }
   mixpanel_mac    = { :spec_name => "MixpanelOSX",     :dependency => "Mixpanel-OSX-Community", :osx => true,  :provider => "Mixpanel"}
-  hockeyApp_mac   = { :spec_name => "HockeyAppOSX",    :dependency => "HockeySDK-Mac",          :osx => true,  :provider => "HockeyApp"}
+  hockeyApp_mac   = { :spec_name => "HockeyAppOSX",    :dependency => "HockeySDK-Mac",          :osx => true,  :provider => "HockeyAppOSX"}
+  parseAnalytics_mac = { :spec_name => "ParseAnalyticsOSX", :dependency => "Parse",             :osx => true,  :provider => "ParseAnalytics", :has_extension => true }
 
 
-  all_analytics = [mixpanel, localytics, flurry, google, kissmetrics, crittercism, crashlytics, fabric, bugsnag, countly, helpshift, kissmetrics_mac, mixpanel_mac, tapstream, newRelic, amplitude, hockeyApp, hockeyAppLib, hockeyApp_mac, parseAnalytics, heap, chartbeat, umeng, librato, segmentio, swrve, yandex, adjust, appsflyer, branch, snowplow, sentry, intercom, keen, adobe]
+  all_analytics = [mixpanel, localytics, flurry, google, kissmetrics, crittercism, crashlytics, fabric, bugsnag, countly, helpshift, kissmetrics_mac, mixpanel_mac, tapstream, newRelic, amplitude, hockeyApp, hockeyAppLib, hockeyApp_mac, parseAnalytics, parseAnalytics_mac, heap, chartbeat, umeng, librato, segmentio, swrve, yandex, adjust, appsflyer, branch, snowplow, sentry, intercom, keen, adobe, installtracker]
 
   # To make the pod spec API cleaner, subspecs are "iOS/KISSmetrics"
 
@@ -90,7 +92,7 @@ Pod::Spec.new do |s|
 
       # It there's a category adding extra class methods to ARAnalytics
       if analytics_spec[:has_extension]
-        sources << "Extensions/*+#{analytics_spec[:spec_name]}.{h,m}"
+        sources << "Extensions/*+#{providername}.{h,m}"
       end
 
       # only add the files for the osx / iOS version
