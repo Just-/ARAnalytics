@@ -1,5 +1,34 @@
 # ARAnalytics
 
+## Version 3.9.1
+* Add support for dynamic page names and event names in the DSL (@arifken)
+* Add configuration setting to the Adobe provider for -trackAction:data: vs. -trackState:data: for screen views. When enabled, allows page views with custom properties to be tracked with -trackState:data: (@arifken)
+* Use proper error logging method for Fabric / Crashlytics (@wzs)
+* Improved Adobe Omniture (@arifken)
+* Mixpanel provider can register push notifications (@rad182)
+* Fixes to Localytics (@garnett)
+* Avoiding using the top level Google Pod due to not being Bitcode compatibole (@fotiDim)
+
+## Version 3.9.0
+
+* Adds MobileAppTracker/Tune support (@fabiojgrocha)
+* Add support for optional anonymous ID  (@alloy)
+* Set user property is now `id` instead of `NSString`  (@alloy)
+* Let HockeySDK work with CocoaPods-Frameworks (@orta)
+* Improved Umeng support  (@ttgb)
+* Added LaunchKit (@axidms)
+* Add support for Segment 3.0 (@sgtsquiggs)
+* Improve initialiser for AdjustProvider (@BenchR267)
+
+## Version 3.8.2
+
+* Updated Mixpanel provider with methods to set super properties and to clean stored properties/distinct IDs. (@rais38)
+
+## Version 3.8.1
+
+* Adds AppSee support (@sgtsquiggs)
+* Adds Super properties for time events (@sp3esu)
+
 ## Version 3.8.0
 
 * Adds Parse for OS X (@stel)

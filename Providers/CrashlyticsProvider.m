@@ -1,4 +1,5 @@
 #import "CrashlyticsProvider.h"
+#import <Crashlytics/Answers.h>
 
 @implementation CrashlyticsProvider
 #ifdef AR_CRASHLYTICS_EXISTS
@@ -21,7 +22,7 @@
     }
 }
 
-- (void)setUserProperty:(NSString *)property toValue:(NSString *)value {
+- (void)setUserProperty:(NSString *)property toValue:(id)value {
     [[Crashlytics sharedInstance] setObjectValue:value forKey:property];
 }
 
@@ -33,11 +34,17 @@
         log = event;
     }
 
+    [Answers logCustomEventWithName:event customAttributes:properties];
+
     CLSLog(@"%@", log);
 }
 
 - (void)remoteLog:(NSString *)parsedString {
     CLSLog(@"%@", parsedString);
+}
+
+- (void)error:(NSError *)error withMessage:(NSString *)message {
+    [[Crashlytics sharedInstance] recordError:error withAdditionalUserInfo:@{@"message": message}];
 }
 
 #endif

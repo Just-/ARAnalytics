@@ -53,7 +53,7 @@
     }
 }
 
--(void)setUserProperty:(NSString *)property toValue:(NSString *)value {
+- (void)setUserProperty:(NSString *)property toValue:(id)value {
     [Localytics setValue:value forIdentifier:property];
 }
 
@@ -61,7 +61,7 @@
     [Localytics tagEvent:event attributes:properties];
 }
 
-- (void)didShowNewPageView:(NSString *)pageTitle {
+- (void)didShowNewPageView:(NSString *)pageTitle withProperties:(NSDictionary *)properties {
     [Localytics tagScreen:pageTitle];
 }
 

@@ -72,7 +72,7 @@
 + (void)setupHeapAnalyticsWithApplicationID:(NSString *)appID;
 + (void)setupChartbeatWithApplicationID:(NSString *)appID;
 + (void)setupLibratoWithEmail:(NSString *)email token:(NSString *)token prefix:(NSString *)prefix;
-+ (void)setupSegmentioWithWriteKey:(NSString*)key;
++ (void)setupSegmentioWithWriteKey:(NSString*)key integrations:(NSArray *)integrations;
 + (void)setupSwrveWithAppID:(NSString *)appID apiKey:(NSString *)apiKey;
 + (void)setupYandexMobileMetricaWithAPIKey:(NSString*)key;
 + (void)setupAdjustWithAppToken:(NSString *)token;
@@ -81,8 +81,12 @@
 + (void)setupSentryWithID:(NSString *)identifier;
 + (void)setupIntercomWithAppID:(NSString *)identifier apiKey:(NSString *)apiKey;
 + (void)setupKeenWithProjectID:(NSString *)projectId andWriteKey:(NSString *)writeKey andReadKey:(NSString *)readKey;
-+ (void)setupAdobeWithData:(NSDictionary *)additionalData;
+
++ (void)setupAdobeWithData:(NSDictionary *)additionalData otherSettings:(NSDictionary *)settings;
 + (void)setupInstallTrackerWithApplicationID:(NSString *)applicationID;
++ (void)setupAppseeWithAPIKey:(NSString *)key;
++ (void)setupMobileAppTrackerWithAdvertiserID:(NSString *)advertiserID conversionKey:(NSString *)conversionKey allowedEvents:(NSArray *)allowedEvents;
++ (void)setupLaunchKitWithAPIToken:(NSString *)token;
 
 /// Add a provider manually
 + (void)setupProvider:(ARAnalyticalProvider *)provider;
@@ -101,8 +105,14 @@
 /// Register a user and an associated email address, it is fine to send nils for either.
 + (void)identifyUserWithID:(NSString *)userID andEmailAddress:(NSString *)email;
 
+/// Register a user and an associated email address, in addition allows you to pass in an ID that you previously used
+/// to track events when the user did not authenticate yet. E.g. `-[UIDevice identifierForVendor]`.
+///
+/// Currently only the Segment provider makes use of this and only when using version TODO or up of their SDK.
++ (void)identifyUserWithID:(NSString *)userID anonymousID:(NSString *)anonymousID andEmailAddress:(NSString *)email;
+
 /// Set a per user property
-+ (void)setUserProperty:(NSString *)property toValue:(NSString *)value;
++ (void)setUserProperty:(NSString *)property toValue:(id)value;
 
 /// Adds to a user property if support exists in the provider
 + (void)incrementUserProperty:(NSString *)counterName byInt:(NSInteger)amount;
@@ -194,6 +204,7 @@ extern NSString * const ARLibratoEmail;
 extern NSString * const ARLibratoToken;
 extern NSString * const ARLibratoPrefix;
 extern NSString * const ARSegmentioWriteKey;
+extern NSString * const ARSegmentioIntegrationsKey;
 extern NSString * const ARSwrveAppID;
 extern NSString * const ARSwrveAPIKey;
 extern NSString * const ARYandexMobileMetricaAPIKey;
@@ -209,4 +220,10 @@ extern NSString * const ARKeenProjectID;
 extern NSString * const ARKeenWriteKey;
 extern NSString * const ARKeenReadKey;
 extern NSString * const ARAdobeData;
+extern NSString * const ARAdobeSettings;
 extern NSString * const ARInstallTrackerApplicationID;
+extern NSString * const ARAppseeAPIKey;
+extern NSString * const ARMobileAppTrackerAdvertiserID;
+extern NSString * const ARMobileAppTrackerConversionKey;
+extern NSString * const ARMobileAppTrackerAllowedEvents;
+extern NSString * const ARLaunchKitAPIToken;

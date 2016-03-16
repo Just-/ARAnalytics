@@ -25,7 +25,7 @@ static NSString * const kMixpanelTimingPropertyKey = @"$duration";
     });
 
     if(! _mixpanel) {
-        _mixpanel = [[Mixpanel alloc] initWithToken:identifier launchOptions:nil andFlushInterval:60];
+        _mixpanel = [[Mixpanel alloc] initWithToken:identifier andFlushInterval:60];
     }
 
     if (host) {
@@ -46,7 +46,7 @@ static NSString * const kMixpanelTimingPropertyKey = @"$duration";
     }
 }
 
-- (void)setUserProperty:(NSString *)property toValue:(NSString *)value {
+- (void)setUserProperty:(NSString *)property toValue:(id)value {
     [[self.mixpanel people] set:property to:value];
 }
 
@@ -78,6 +78,26 @@ static NSString * const kMixpanelTimingPropertyKey = @"$duration";
 {
     [self.mixpanel createAlias:alias forDistinctID:self.mixpanel.distinctId];
     [self identifyUserWithID:alias andEmailAddress:nil];
+}
+
+- (void)registerSuperProperties:(NSDictionary *)properties
+{
+    [self.mixpanel registerSuperProperties:properties];
+}
+
+- (void)addPushDeviceToken:(NSData *)deviceToken
+{
+    [[self.mixpanel people] addPushDeviceToken:deviceToken];
+}
+
+- (NSDictionary *)currentSuperProperties
+{
+    return [self.mixpanel currentSuperProperties];
+}
+
+- (void)reset
+{
+    [self.mixpanel reset];
 }
 
 #endif
