@@ -21,7 +21,8 @@
 }
 
 - (void)event:(NSString *)event withProperties:(NSDictionary *)properties {
-    if (!event) return;
+    if (!event || ![Branch getInstance].getFirstReferringParams.allKeys.count) return; // count only branch users
+    
     if (properties) {
         [[Branch getInstance] userCompletedAction:event withState:properties];
     } else {
