@@ -186,6 +186,10 @@ static BOOL _ARLogShouldPrintStdout = YES;
         [self setupLaunchKitWithAPIToken:analyticsDictionary[ARLaunchKitAPIToken]];
     }
     
+    if (analyticsDictionary[ARBranchAPIKey]) {
+        [self setupBranchWithAPIKey:analyticsDictionary[ARBranchAPIKey]];
+    }
+    
     // Add future integrations here:
 
 
